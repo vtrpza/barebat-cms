@@ -1,0 +1,367 @@
+warning: in the working copy of 'package-lock.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'package.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'postcss.config.mjs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/globals.css', LF will be replaced by CRLF the next time Git touches it
+[1mdiff --git a/.cursor/rules/CHANGELOG.md b/.cursor/rules/CHANGELOG.md[m
+[1mindex 80452f3..b103bd3 100644[m
+[1m--- a/.cursor/rules/CHANGELOG.md[m
+[1m+++ b/.cursor/rules/CHANGELOG.md[m
+[36m@@ -18,9 +18,70 @@[m
+ - [x] Supabase Integration[m
+   - [x] Basic client setup[m
+   - [x] Authentication system[m
+[31m-  - [ ] Initial database schema[m
+[31m-  - [ ] Row Level Security policies[m
+[31m-- [ ] Basic Dashboard Structure[m
+[32m+[m[32m  - [x] Initial database schema[m
+[32m+[m[32m  - [x] Row Level Security policies[m
+[32m+[m[32m- [x] Basic Dashboard Structure[m
+[32m+[m[32m  - [x] Responsive layout implementation[m
+[32m+[m[32m  - [x] Navigation sidebar[m
+[32m+[m[32m  - [x] User menu and authentication flow[m
+[32m+[m[32m  - [x] Error boundaries[m
+[32m+[m[32m  - [x] SEO optimization[m
+[32m+[m[32m  - [x] Component documentation[m
+[32m+[m
+[32m+[m[32m### Phase 2 - Event Management (Upcoming)[m
+[32m+[m[32m- [ ] Event Creation System[m
+[32m+[m[32m  - [ ] Form Components[m
+[32m+[m[32m    - [ ] Reusable form hooks with validation[m
+[32m+[m[32m    - [ ] Error handling and feedback[m
+[32m+[m[32m    - [ ] Loading states for async operations[m
+[32m+[m[32m  - [ ] Event Management Dashboard[m
+[32m+[m[32m    - [ ] Event listing with filters and search[m
+[32m+[m[32m    - [ ] Event details view[m
+[32m+[m[32m    - [ ] Event status management[m
+[32m+[m[32m    - [ ] Event analytics dashboard[m
+[32m+[m[32m  - [ ] Event Settings[m
+[32m+[m[32m    - [ ] Basic event information[m
+[32m+[m[32m    - [ ] Date and time management[m
+[32m+[m[32m    - [ ] Location settings[m
+[32m+[m[32m    - [ ] Event privacy controls[m
+[32m+[m[32m- [ ] Subdomain System[m
+[32m+[m[32m  - [ ] Dynamic routing implementation[m
+[32m+[m[32m    - [ ] Subdomain middleware[m
+[32m+[m[32m    - [ ] Route protection[m
+[32m+[m[32m    - [ ] Cache strategies[m
+[32m+[m[32m  - [ ] Domain Management[m
+[32m+[m[32m    - [ ] Domain verification flow[m
+[32m+[m[32m    - [ ] SSL certificate handling[m
+[32m+[m[32m    - [ ] DNS configuration guide[m
+[32m+[m[32m- [ ] Builder.io Integration[m
+[32m+[m[32m  - [ ] Visual Editor Components[m
+[32m+[m[32m    - [ ] Theme customization[m
+[32m+[m[32m    - [ ] Layout templates[m
+[32m+[m[32m    - [ ] Component registry[m
+[32m+[m[32m  - [ ] Template System[m
+[32m+[m[32m    - [ ] Default templates[m
+[32m+[m[32m    - [ ] Custom sections[m
+[32m+[m[32m    - [ ] Mobile responsiveness[m
+[32m+[m[32m  - [ ] Preview System[m
+[32m+[m[32m    - [ ] Live preview[m
+[32m+[m[32m    - [ ] Device preview[m
+[32m+[m[32m    - [ ] SEO preview[m
+[32m+[m
+[32m+[m[32m### Technical Improvements[m
+[32m+[m[32m- [ ] Testing Infrastructure[m
+[32m+[m[32m  - [ ] Unit test setup with Jest[m
+[32m+[m[32m  - [ ] Integration tests with Testing Library[m
+[32m+[m[32m  - [ ] E2E tests with Playwright[m
+[32m+[m[32m- [ ] Performance Optimization[m
+[32m+[m[32m  - [ ] Implement React Query for data fetching[m
+[32m+[m[32m  - [ ] Add loading states[m
+[32m+[m[32m  - [ ] Optimize image loading[m
+[32m+[m[32m  - [ ] Add service worker for offline support[m
+[32m+[m[32m- [ ] Monitoring & Logging[m
+[32m+[m[32m  - [ ] Error tracking setup[m
+[32m+[m[32m  - [ ] Performance monitoring[m
+[32m+[m[32m  - [ ] User analytics[m
+[32m+[m[32m  - [ ] Audit logging[m
+ [m
+ ### Current Sprint Progress[m
+ - Project Structure and Configuration[m
+[36m@@ -37,16 +98,18 @@[m
+   - Implemented signup page[m
+   - Added email verification page[m
+   - Set up protected routes[m
+[32m+[m[32m- Database Schema Implementation[m
+[32m+[m[32m  - Created initial migration with tables[m
+[32m+[m[32m  - Added Row Level Security policies[m
+[32m+[m[32m  - Implemented TypeScript types[m
+[32m+[m[32m  - Set up automatic timestamps and triggers[m
+[32m+[m[32m  - Added user profile handling[m
+ [m
+ ### Next Steps[m
+[31m-1. Design and implement database schema[m
+[31m-   - Create user tables[m
+[31m-   - Set up event tables[m
+[31m-   - Configure RLS policies[m
+[31m-2. Build basic dashboard layout[m
+[31m-   - Create sidebar navigation[m
+[31m-   - Add header with user menu[m
+[31m-   - Implement responsive design[m
+[32m+[m[32m1. Begin Event Creation System implementation[m
+[32m+[m[32m   - Set up form components with React Hook Form[m
+[32m+[m[32m   - Implement event creation flow[m
+[32m+[m[32m   - Add event management dashboard[m
+ [m
+ ### Technical Decisions[m
+ 1. **Authentication:**[m
+[36m@@ -66,10 +129,10 @@[m
+    - Responsive design with Tailwind CSS[m
+ [m
+ ### Notes for Next Sprint[m
+[31m-- Need to implement Supabase authentication flows[m
+[31m-- Design database schema for core features[m
+[31m-- Create reusable form components with React Hook Form[m
+[31m-- Set up Builder.io visual editor integration[m
+[32m+[m[32m- Implement comprehensive testing strategy[m
+[32m+[m[32m- Set up monitoring and logging infrastructure[m
+[32m+[m[32m- Begin event creation system development[m
+[32m+[m[32m- Plan Builder.io integration architecture[m
+ [m
+ #### Phase 2 - Event Management[m
+ - [ ] Event Creation System[m
+[36m@@ -111,4 +174,36 @@[m
+ - [ ] Purchase Flow[m
+   - [ ] Shopping cart[m
+   - [ ] Checkout process[m
+[31m-  - [ ] Order confirmation [m
+\ No newline at end of file[m
+[32m+[m[32m  - [ ] Order confirmation[m
+[32m+[m
+[32m+[m[32m## [2024-03-21] - Event Creation System Implementation[m
+[32m+[m
+[32m+[m[32m### Added[m
+[32m+[m[32m- Event form components and validation[m
+[32m+[m[32m  - Created event type definitions and Zod schema[m
+[32m+[m[32m  - Implemented reusable form hook with React Hook Form[m
+[32m+[m[32m  - Created EventForm component with Radix UI[m
+[32m+[m[32m  - Added new event creation page[m
+[32m+[m[32m- Form Features[m
+[32m+[m[32m  - Client-side validation with Zod[m
+[32m+[m[32m  - Accessible form components with Radix UI[m
+[32m+[m[32m  - Error handling and success callbacks[m
+[32m+[m[32m  - TypeScript integration for type safety[m
+[32m+[m
+[32m+[m[32m### Next Steps[m
+[32m+[m[32m1. Implement Supabase integration for event creation[m
+[32m+[m[32m2. Add form field for location details[m
+[32m+[m[32m3. Implement subdomain validation and availability check[m
+[32m+[m[32m4. Add event status management[m
+[32m+[m[32m5. Create event dashboard view[m
+[32m+[m
+[32m+[m[32m### Technical Decisions[m
+[32m+[m[32m1. **Form Management:**[m
+[32m+[m[32m   - Using React Hook Form for form state[m
+[32m+[m[32m   - Zod for schema validation[m
+[32m+[m[32m   - Radix UI for accessible form components[m
+[32m+[m
+[32m+[m[32m2. **Component Architecture:**[m
+[32m+[m[32m   - Reusable form hook for separation of concerns[m
+[32m+[m[32m   - TypeScript for type safety[m
+[32m+[m[32m   - Modular component structure[m[41m [m
+\ No newline at end of file[m
+[1mdiff --git a/.eslintrc.json b/.eslintrc.json[m
+[1mindex 93ade21..3599f73 100644[m
+[1m--- a/.eslintrc.json[m
+[1m+++ b/.eslintrc.json[m
+[36m@@ -1,16 +1,6 @@[m
+ {[m
+[31m-  "extends": ["next/core-web-vitals", "prettier"],[m
+[31m-  "plugins": ["prettier"],[m
+[32m+[m[32m  "extends": ["next/core-web-vitals"],[m
+   "rules": {[m
+[31m-    "prettier/prettier": "error",[m
+[31m-    "no-unused-vars": "warn",[m
+[31m-    "no-console": "warn",[m
+[31m-    "@next/next/no-html-link-for-pages": "error",[m
+[31m-    "react/no-unescaped-entities": "off",[m
+[31m-    "import/prefer-default-export": "off",[m
+[31m-    "react/jsx-props-no-spreading": "off",[m
+[31m-    "react/require-default-props": "off",[m
+[31m-    "react/jsx-no-useless-fragment": "warn",[m
+[31m-    "import/no-extraneous-dependencies": "off"[m
+[32m+[m[32m    "react/no-unescaped-entities": "off"[m
+   }[m
+[31m-}[m
+[32m+[m[32m}[m[41m [m
+[1mdiff --git a/package-lock.json b/package-lock.json[m
+[1mindex f5f17f3..dc0e4d7 100644[m
+[1m--- a/package-lock.json[m
+[1m+++ b/package-lock.json[m
+[36m@@ -8,31 +8,38 @@[m
+       "name": "barebat-cms",[m
+       "version": "0.1.0",[m
+       "dependencies": {[m
+[31m-        "@radix-ui/react-icons": "^1.3.2",[m
+[32m+[m[32m        "@hookform/resolvers": "^3.3.4",[m
+[32m+[m[32m        "@radix-ui/react-form": "^0.1.2",[m
+[32m+[m[32m        "@radix-ui/react-icons": "^1.3.0",[m
+[32m+[m[32m        "@radix-ui/react-label": "^2.0.2",[m
+[32m+[m[32m        "@radix-ui/react-slot": "^1.0.2",[m
+         "@radix-ui/themes": "^3.2.1",[m
+         "@supabase/auth-helpers-nextjs": "^0.10.0",[m
+[31m-        "@supabase/supabase-js": "^2.49.1",[m
+[31m-        "clsx": "^2.1.1",[m
+[32m+[m[32m        "@supabase/supabase-js": "^2.39.0",[m
+[32m+[m[32m        "clsx": "^2.1.0",[m
+[32m+[m[32m        "lucide-react": "^0.330.0",[m
+         "next": "15.2.3",[m
+         "react": "^19.0.0",[m
+         "react-dom": "^19.0.0",[m
+[31m-        "tailwind-merge": "^3.0.2"[m
+[32m+[m[32m        "react-hook-form": "^7.50.0",[m
+[32m+[m[32m        "tailwind-merge": "^3.0.0",[m
+[32m+[m[32m        "zod": "^3.22.4"[m
+       },[m
+       "devDependencies": {[m
+[31m-        "@eslint/eslintrc": "^3",[m
+[31m-        "@tailwindcss/postcss": "^4",[m
+[31m-        "@trivago/prettier-plugin-sort-imports": "^5.2.2",[m
+[31m-        "@types/node": "^20",[m
+[31m-        "@types/react": "^19",[m
+[31m-        "@types/react-dom": "^19",[m
+[31m-        "eslint": "^9",[m
+[32m+[m[32m        "@trivago/prettier-plugin-sort-imports": "^5.0.0",[m
+[32m+[m[32m        "@types/node": "^20.11.0",[m
+[32m+[m[32m        "@types/react": "^19.0.0",[m
+[32m+[m[32m        "@types/react-dom": "^19.0.0",[m
+[32m+[m[32m        "autoprefixer": "^10.4.17",[m
+[32m+[m[32m        "eslint": "^8.56.0",[m
+         "eslint-config-next": "15.2.3",[m
+[31m-        "eslint-config-prettier": "^10.1.1",[m
+[31m-        "eslint-plugin-prettier": "^5.2.3",[m
+[31m-        "prettier": "^3.5.3",[m
+[31m-        "prettier-plugin-tailwindcss": "^0.6.11",[m
+[31m-        "tailwindcss": "^4",[m
+[31m-        "typescript": "^5"[m
+[32m+[m[32m        "eslint-config-prettier": "^9.1.0",[m
+[32m+[m[32m        "eslint-plugin-prettier": "^5.1.3",[m
+[32m+[m[32m        "postcss": "^8.4.35",[m
+[32m+[m[32m        "prettier": "^3.2.5",[m
+[32m+[m[32m        "prettier-plugin-tailwindcss": "^0.5.11",[m
+[32m+[m[32m        "tailwindcss": "^3.4.1",[m
+[32m+[m[32m        "typescript": "^5.3.3"[m
+       }[m
+     },[m
+     "node_modules/@alloc/quick-lru": {[m
+[36m@@ -249,55 +256,17 @@[m
+         "node": "^12.0.0 || ^14.0.0 || >=16.0.0"[m
+       }[m
+     },[m
+[31m-    "node_modules/@eslint/config-array": {[m
+[31m-      "version": "0.19.2",[m
+[31m-      "resolved": "https://registry.npmjs.org/@eslint/config-array/-/config-array-0.19.2.tgz",[m
+[31m-      "integrity": "sha512-GNKqxfHG2ySmJOBSHg7LxeUx4xpuCoFjacmlCoYWEbaPXLwvfIjixRI12xCQZeULksQb23uiA8F40w5TojpV7w==",[m
+[31m-      "dev": true,[m
+[31m-      "license": "Apache-2.0",[m
+[31m-      "dependencies": {[m
+[31m-        "@eslint/object-schema": "^2.1.6",[m
+[31m-        "debug": "^4.3.1",[m
+[31m-        "minimatch": "^3.1.2"[m
+[31m-      },[m
+[31m-      "engines": {[m
+[31m-        "node": "^18.18.0 || ^20.9.0 || >=21.1.0"[m
+[31m-      }[m
+[31m-    },[m
+[31m-    "node_modules/@eslint/config-helpers": {[m
+[31m-      "version": "0.1.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/@eslint/config-helpers/-/config-helpers-0.1.0.tgz",[m
+[31m-      "integrity": "sha512-kLrdPDJE1ckPo94kmPPf9Hfd0DU0Jw6oKYrhe+pwSC0iTUInmTa+w6fw8sGgcfkFJGNdWOUeOaDM4quW4a7OkA==",[m
+[31m-      "dev": true,[m
+[31m-      "license": "Apache-2.0",[m
+[31m-      "engines": {[m
+[31m-        "node": "^18.18.0 || ^20.9.0 || >=21.1.0"[m
+[31m-      }[m
+[31m-    },[m
+[31m-    "node_modules/@eslint/core": {[m
+[31m-      "version": "0.12.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/@eslint/core/-/core-0.12.0.tgz",[m
+[31m-      "integrity": "sha512-cmrR6pytBuSMTaBweKoGMwu3EiHiEC+DoyupPmlZ0HxBJBtIxwe+j/E4XPIKNx+Q74c8lXKPwYawBf5glsTkHg==",[m
+[31m-      "dev": true,[m
+[31m-      "license": "Apache-2.0",[m
+[31m-      "dependencies": {[m
+[31m-        "@types/json-schema": "^7.0.15"[m
+[31m-      },[m
+[31m-      "engines": {[m
+[31m-        "node": "^18.18.0 || ^20.9.0 || >=21.1.0"[m
+[31m-      }[m
+[31m-    },[m
+     "node_modules/@eslint/eslintrc": {[m
+[31m-      "version": "3.3.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/@eslint/eslintrc/-/eslintrc-3.3.0.tgz",[m
+[31m-      "integrity": "sha512-yaVPAiNAalnCZedKLdR21GOGILMLKPyqSLWaAjQFvYA2i/ciDi8ArYVr69Anohb6cH2Ukhqti4aFnYyPm8wdwQ==",[m
+[32m+[m[32m      "version": "2.1.4",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@eslint/eslintrc/-/eslintrc-2.1.4.tgz",[m
+[32m+[m[32m      "integrity": "sha512-269Z39MS6wVJtsoUl10L60WdkhJVdPG24Q4eZTH3nnF6lpvSShEK3wQjDX9JRWAUPvPh7COouPpU9IrqaZFvtQ==",[m
+       "dev": true,[m
+       "license": "MIT",[m
+       "dependencies": {[m
+         "ajv": "^6.12.4",[m
+         "debug": "^4.3.2",[m
+[31m-        "espree": "^10.0.1",[m
+[31m-        "globals": "^14.0.0",[m
+[32m+[m[32m        "espree": "^9.6.0",[m
+[32m+[m[32m        "globals": "^13.19.0",[m
+         "ignore": "^5.2.0",[m
+         "import-fresh": "^3.2.1",[m
+         "js-yaml": "^4.1.0",[m
+[36m@@ -305,44 +274,20 @@[m
+         "strip-json-comments": "^3.1.1"[m
+       },[m
+       "engines": {[m
+[31m-        "node": "^18.18.0 || ^20.9.0 || >=21.1.0"[m
+[32m+[m[32m        "node": "^12.22.0 || ^14.17.0 || >=16.0.0"[m
+       },[m
+       "funding": {[m
+         "url": "https://opencollective.com/eslint"[m
+       }[m
+     },[m
+     "node_modules/@eslint/js": {[m
+[31m-      "version": "9.22.0",[m
+[31m-      "resolved": "https://registry.npmjs.org/@eslint/js/-/js-9.22.0.tgz",[m
+[31m-      "integrity": "sha512-vLFajx9o8d1/oL2ZkpMYbkLv8nDB6yaIwFNt7nI4+I80U/z03SxmfOMsLbvWr3p7C+Wnoh//aOu2pQW8cS0HCQ==",[m
+[32m+[m[32m      "version": "8.57.1",[m
+[32m+[m[32m      "resolved": "https://registry.npmjs.org/@eslint/js/-/js-8.57.1.tgz",[m
+[32m+[m[32m      "integrity": "sha512-d9zaMRSTIKDLhctzH12MtXvJKSSUhaHcjV+2Z+GK+EEY7XKpP5yR4x+N3TAcHTcu963nIr+TMcCb4DBCYX1z6Q==",[m
+       "dev": true,[m
+       "license": "MIT",[m
+       "engines": {[m
+[31m-        "node": "^18.18.0 || ^20.9.0 || >=21.1.0"[m
+[31m-      }[m
+[31m-    },[m
+[31m-    "node_modules/@eslint/object-schema": {[m
+[31m-      "version": "2.1.6",[m
+[31m-      "resolved": "https://registry.npmjs.org/@eslint/object-schema/-/object-schema-2.1.6.tgz",[m
+[31m-      "integrity": "sha512-RBMg5FRL0I0gs51M/guSAj5/e14VQ4tpZnQNWwuDT66P14I43ItmPfIZRhO9fUVIPOAQXU47atlywZ/czoqFPA==",[m
+[31m-      "dev": true,[m
+[31m-      "license": "Apache-2.0",[m
+[31m-      "engines": {[m
+[31m-        "node": "^18.18.0 || ^20.9.0 || >=21.1.0"[m
+[31m-      }[m
+[31m-    },[m
+[31m-    "node_modules/@eslint/plugin-kit": {[m
+[31m-      "version": "0.2.7",[m
+[31m-      "resolved": "https://registry.npmjs.org/@eslint/plugin-kit/-/plugin-kit-0.2.7.tgz",[m
+[31m-      "integrity": "sha512-JubJ5B2pJ4k4yGxaNLdbjrnk9d/iDz6/q8wOilpIowd6PJPgaxCuHBnBszq7Ce2TyMrywm5r4PnKm6V3iiZF+g==",[m
+[31m-      "dev": true,[m
+[31m-      "license": "Apache-2.0",[m
+[31m-      "dependencies": {[m
+[31m-        "@eslint/core": "^0.12.0",[m
+[31m-        "levn": "^0.4.1"[m
+[31m-      },[m
+[31m-      "engines": {[m
+[31m-        "node": "^18.18.0 || ^20.9.0 || >=21.1.0"[m
+[32m+[m[32m        "node": "^12.22.0 || ^14.17.0 || >=16.0.0"[m
+       }[m
+     },[m
+     "node_modules/@floating-ui/core": {[m
+[36m@@ -383,42 +328,29 @@[m
+       "integrity": "sha512-MDWhGtE+eHw5JW7lq4qhc5yRLS11ERl1c7Z6Xd0a58DozHES6EnNNwUWbMiG4J9Cgj053Bhk8zvlhFYKVhULwg==",[m
+       "license": "MIT"[m
+     },[m
+[31m-    "node_modules/@humanfs/core": {[m
+[31m-      "version": "0.19.1",[m
+[31m-      "resolved": "https://registry.npmjs.org/@humanfs/core/-/core-0.19.1.tgz",[m
+[31m-      "integrity": "sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBig
