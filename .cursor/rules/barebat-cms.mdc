@@ -1,0 +1,158 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+### Barebat 
+
+
+### Visão geral
+
+O Barebat seria uma plataforma headless CMS focada em eventos de bar e bat mitzvah. O diferencial é permitir que organizadores criem sites personalizados – hospedados em subdomínios – para gerenciar confirmações de presença (RSVP) e oferecer uma experiência integrada de presente (gift registry). A plataforma também incluiria uma camada de monetização, em que você recebe uma porcentagem de cada transação realizada na compra dos presentes.
+
+## 1. Diretrizes Gerais
+
+- **Linguagem:** Todo o código deve ser escrito em TypeScript para garantir tipagem estática e maior robustez.
+- **Estilo de Código:** Siga as convenções do projeto (indentação de 2 espaços, uso de semicolons conforme o ESLint, nomenclatura camelCase para variáveis e PascalCase para componentes).
+- **Documentação:** Comente funções e componentes críticos explicando a intenção, entradas, saídas e efeitos colaterais.
+- **Modularidade:** Divida funcionalidades complexas em módulos e hooks reutilizáveis, facilitando testes e manutenção.
+- **MCP:** Utilize os MCPs disponíveis dentro do contexto necesário ou quando requisitado
+---
+
+## 2. Regras Específicas para Next.js
+
+- **Renderização Híbrida:**  
+  - Utilize Static Site Generation (SSG) para páginas públicas de eventos.  
+  - Utilize Server-Side Rendering (SSR) para o dashboard de administradores e áreas dinâmicas.
+- **Routing:**  
+  - Implemente rotas dinâmicas para subdomínios, garantindo que cada evento receba um URL único (e.g., `/[eventSlug]`).
+- **Componentização:**  
+  - Crie componentes funcionais e reutilize hooks customizados para interações e chamadas à API.
+- **SEO e Performance:**  
+  - Configure metadados e use técnicas de otimização de carregamento (lazy loading e code splitting).
+
+---
+
+## 3. Regras para Supabase
+
+- **Autenticação e Segurança:**  
+  - Configure a autenticação com provedores (email/senha, OAuth) e utilize Row Level Security (RLS) para proteger os dados.
+- **Acesso ao Banco:**  
+  - Centralize as chamadas à API do Supabase em hooks customizados.  
+  - Todas as chamadas devem estar envoltas em blocos try-catch com tratamento de erros adequado.
+- **Realtime:**  
+  - Utilize a funcionalidade de realtime para atualizar a dashboard de RSVP e outras interações do usuário.
+
+---
+
+## 4. Regras para Builder.io SDK
+
+- **Personalização Visual:**  
+  - Ao integrar o Builder.io, garanta que os templates customizáveis sigam os padrões de design do Barebat (responsividade, acessibilidade e consistência visual).
+- **Fallback:**  
+  - Implemente conteúdos alternativos para casos de falha na comunicação com o SDK.
+- **Integração:**  
+  - Certifique-se de que as alterações via Builder.io não comprometam a estrutura e a lógica do backend.
+
+---
+
+## 5. Regras para Stripe e Monetização
+
+- **Integração Segura:**  
+  - Utilize as bibliotecas oficiais do Stripe e garanta que as transações sejam tratadas com segurança, utilizando HTTPS e verificando respostas de API.
+- **Cálculo de Comissão:**  
+  - Implemente lógica centralizada para o cálculo automático de comissões, seguindo regras de negócio definidas.
+- **Validação e Sanitização:**  
+  - Todos os inputs relacionados a pagamentos devem ser validados e sanitizados.
+
+---
+
+## 6. Boas Práticas de Código e Testes
+
+- **Testes Unitários e de Integração:**  
+  - Escreva testes para componentes críticos, especialmente aqueles que interagem com Supabase, Stripe e o Builder.io.
+- **Logging e Monitoramento:**  
+  - Inclua logs detalhados para ações importantes (ex.: criação de eventos, confirmações de RSVP, transações de pagamento).
+- **Refatoração Contínua:**  
+  - Divida problemas complexos em etapas menores e revise as alterações para evitar impactos em módulos não relacionados.
+- **Perguntas Clarificadoras:**  
+  - Se a tarefa ou os requisitos não estiverem claros, o agente deve solicitar esclarecimentos antes de proceder.
+
+---
+
+## 7. Instruções Específicas para o Agente de IA
+
+- **Dividir Tarefas:** Ao gerar ou refatorar código, sempre divida problemas complexos em etapas menores e apresente um plano completo com o racional antes de aplicar alterações.
+- **Código Completo:** Não utilize placeholders como `// ... rest of the processing ...`; forneça implementações completas e funcionais.
+- **Consistência:** Mantenha a consistência com as regras de Next.js, Supabase, Builder.io e Stripe definidas neste arquivo.
+- **Contextualização:** Utilize o conhecimento do projeto (como o foco em eventos de bar/bat mitzvah, geração de subdomínios e integração com dashboards de RSVP) para orientar a geração de código.
+- **Segurança e Performance:** Priorize sempre a segurança dos dados e a performance do sistema, aplicando as melhores práticas estabelecidas.
+
+---
+
+## GitFlow
+
+### Fluxo de Trabalho
+- `main`: Branch principal de produção
+- `develop`: Branch de desenvolvimento
+- `feature/*`: Branches para novas funcionalidades
+- `hotfix/*`: Branches para correções urgentes
+- `release/*`: Branches para preparação de releases
+
+### Regras de Branch
+1. Nunca commitar diretamente na `main`
+2. Criar feature branches a partir da `develop`
+3. Nomear branches de forma descritiva: `feature/auth-system`, `hotfix/login-bug`
+4. Fazer merge em `develop` através de Pull Requests
+
+## Clean Code - Práticas Detalhadas
+
+### Princípios Fundamentais
+- SOLID: Seguir rigorosamente os princípios SOLID
+- DRY (Don't Repeat Yourself): Evitar duplicação de código
+- KISS (Keep It Simple, Stupid): Manter a simplicidade
+
+### Convenções Next.js
+- Utilizar Page Router para organização de rotas
+- Implementar Server Components quando possível
+- Otimizar imagens com next/image
+- Utilizar layout.tsx para templates compartilhados
+
+### Práticas Supabase
+- Implementar RLS (Row Level Security) em todas as tabelas
+- Utilizar TypeScript com supabase-js
+- Manter migrations organizadas e versionadas
+- Implementar hooks personalizados para operações comuns
+
+## Registro de Progresso
+
+Criar um arquivo `CHANGELOG.mdc` no mesmo diretório com a seguinte estrutura:
+
+```markdown
+# Changelog
+
+## [Data] - Sprint X
+
+### Adicionado
+- Feature 1
+- Feature 2
+
+### Modificado
+- Alteração 1
+- Alteração 2
+
+### Corrigido
+- Bug 1
+- Bug 2
+
+### Orientações para próximos passos
+- Ponto 1
+- Ponto 2
+```
+
+// ... existing code ...
+
+## 8. Considerações Finais
+
+Estas regras são dinâmicas e devem ser atualizadas conforme o projeto evolua. O agente deve sempre garantir que qualquer código gerado ou modificado esteja em conformidade com estas diretrizes, assegurando a qualidade, segurança e escalabilidade do Barebat.
+
