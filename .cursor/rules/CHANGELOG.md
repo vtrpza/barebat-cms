@@ -1,6 +1,94 @@
 # Changelog
 
-## [2024-03-20] - Initial Setup
+## [2024-03-21] - Sprint 2: Event Creation System
+
+### Added
+- Event Form Components
+  - Form validation with Zod
+  - Error handling and feedback
+  - Loading states
+  - Responsive layout
+- Event Management Features
+  - Event creation with Supabase
+  - Subdomain validation and availability check
+  - Event listing with filters
+  - Event status management
+- Event Dashboard Views
+  - Event list page with grid layout
+  - Event creation page
+  - Basic event card components
+- Event Details Page
+  - General settings form
+  - RSVP settings management
+  - Design customization
+  - Real-time updates
+- UI Components
+  - Shadcn/ui integration
+  - Form components
+  - Toast notifications
+  - Tabs interface
+
+### Modified
+- Component Architecture
+  - Implemented reusable form hooks
+  - Added TypeScript strict mode
+  - Restructured for modular components
+- UI/UX Improvements
+  - Enhanced responsive grid layouts
+  - Integrated Radix UI components
+  - Added loading states
+- Types and Schemas
+  - Updated Event type definition
+  - Added form validation schemas
+  - Improved type safety
+
+### Orientações para próximos passos
+- Implement Builder.io integration
+- Add event preview functionality
+- Set up subdomain routing
+- Add comprehensive test coverage
+- Implement event analytics
+
+## [2024-03-20] - Sprint 1: Foundation Setup
+
+### Added
+- Project Structure and Configuration
+  - Next.js and TypeScript setup
+  - Supabase client configuration
+  - Environment variable templates
+  - Utility functions and hooks
+  - Tailwind CSS with custom theme
+  - Radix UI components
+  - Base layout components
+- Authentication System
+  - Authentication middleware
+  - Login and signup pages
+  - Email verification flow
+  - Protected routes
+- Database Schema
+  - Initial migration with tables
+  - Row Level Security policies
+  - TypeScript types
+  - Automatic timestamps and triggers
+  - User profile handling
+- Code Quality Tools
+  - Prettier with import sorting
+  - ESLint integration
+  - Tailwind CSS formatting
+
+### Modified
+- Project Structure
+  - Organized directory following Next.js conventions
+  - Implemented component documentation
+  - Added SEO optimization
+  - Set up error boundaries
+
+### Orientações para próximos passos
+- Begin Event Creation System implementation
+- Set up form components with React Hook Form
+- Implement event creation flow
+- Add event management dashboard
+- Set up monitoring and logging infrastructure
 
 ### Established Architecture Phases
 
@@ -163,85 +251,6 @@
   - [ ] Notification system
 
 #### Phase 4 - Gift Registry
-- [ ] Gift Management System
-  - [ ] Gift catalog
-  - [ ] Gift categories
-  - [ ] Gift status tracking
-- [ ] Stripe Integration
-  - [ ] Payment processing
-  - [ ] Commission handling
-  - [ ] Transaction dashboard
-- [ ] Purchase Flow
-  - [ ] Shopping cart
-  - [ ] Checkout process
-  - [ ] Order confirmation
-
-## [2024-03-21] - Event Creation System Implementation
-
-### Added
-- [x] Event Form Components
-  - [x] Form validation with Zod
-  - [x] Error handling and feedback
-  - [x] Loading states
-  - [x] Responsive layout
-- [x] Event Management Features
-  - [x] Event creation with Supabase
-  - [x] Subdomain validation and availability check
-  - [x] Event listing with filters
-  - [x] Event status management
-- [x] Event Dashboard Views
-  - [x] Event list page with grid layout
-  - [x] Event creation page
-  - [x] Basic event card components
-
-### Next Steps (Phase 2 - Event Management)
-1. Event Details and Management
-   - [ ] Event details page
-   - [ ] Event editing functionality
-   - [ ] Event deletion with confirmation
-   - [ ] Event status updates (draft/published/archived)
-
-2. Event Analytics Dashboard
-   - [ ] Guest count tracking
-   - [ ] RSVP statistics
-   - [ ] Basic analytics charts
-   - [ ] Export functionality
-
-3. Builder.io Integration
-   - [ ] Visual editor setup
-   - [ ] Default templates
-   - [ ] Component registry
-   - [ ] Preview system
-
-4. Subdomain System
-   - [ ] Dynamic routing implementation
-   - [ ] Domain verification
-   - [ ] SSL certificate handling
-   - [ ] DNS configuration
-
-### Technical Improvements Needed
-- [ ] Add loading skeletons for better UX
-- [ ] Implement optimistic updates
-- [ ] Add toast notifications for actions
-- [ ] Implement proper error boundaries
-- [ ] Add unit tests for components
-- [ ] Add E2E tests for critical flows
-
-### Phase 3 - RSVP System (Upcoming)
-- [ ] RSVP Form Creation
-  - [ ] Dynamic form builder
-  - [ ] Guest information collection
-  - [ ] Dietary restrictions handling
-- [ ] Guest Management
-  - [ ] Guest list dashboard
-  - [ ] Guest grouping system
-  - [ ] Communication system
-- [ ] Real-time Updates
-  - [ ] Supabase real-time subscriptions
-  - [ ] Live guest list updates
-  - [ ] Notification system
-
-### Phase 4 - Gift Registry (Upcoming)
 - [ ] Gift Management System
   - [ ] Gift catalog
   - [ ] Gift categories

@@ -55,4 +55,55 @@ export async function getEventsByUser(userId: string): Promise<Event[]> {
   }
 
   return data as Event[];
+}
+
+export async function getEventById(id: string): Promise<Event | null> {
+  const supabase = createClient();
+  
+  const { data, error } = await supabase
+    .from("events")
+    .select("*")
+    .eq("id", id)
+    .single();
+
+  if (error) {
+    console.error("Error fetching event:", error);
+    return null;
+  }
+
+  return data;
+}
+
+export async function updateEvent(id: string, updates: Partial<Event>): Promise<Event | null> {
+  const supabase = createClient();
+  
+  const { data, error } = await supabase
+    .from("events")
+    .update(updates)
+    .eq("id", id)
+    .select()
+    .single();
+
+  if (error) {
+    console.error("Error updating event:", error);
+    return null;
+  }
+
+  return data;
+}
+
+export async function deleteEvent(id: string): Promise<boolean> {
+  const supabase = createClient();
+  
+  const { error } = await supabase
+    .from("events")
+    .delete()
+    .eq("id", id);
+
+  if (error) {
+    console.error("Error deleting event:", error);
+    return false;
+  }
+
+  return true;
 } 
