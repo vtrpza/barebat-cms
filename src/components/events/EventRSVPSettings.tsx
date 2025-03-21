@@ -50,7 +50,7 @@ export function EventRSVPSettings({ event }: EventRSVPSettingsProps) {
         title: "Success",
         description: "RSVP settings updated successfully",
       });
-    } catch (error) {
+    } catch {
       toast({
         title: "Error",
         description: "Failed to update RSVP settings",
@@ -94,8 +94,9 @@ export function EventRSVPSettings({ event }: EventRSVPSettingsProps) {
               <FormControl>
                 <Input
                   type="number"
-                  {...field}
+                  value={field.value === null ? '' : field.value}
                   onChange={(e) => field.onChange(e.target.value ? Number(e.target.value) : null)}
+                  onBlur={field.onBlur}
                   disabled={!form.watch("rsvp_enabled")}
                   placeholder="Leave empty for unlimited"
                 />

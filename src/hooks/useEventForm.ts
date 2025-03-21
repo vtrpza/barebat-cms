@@ -3,9 +3,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { EventFormData, eventSchema } from '@/types/event';
 import { createEvent, checkSubdomainAvailability } from '@/lib/supabase/events';
 import { useAuth } from './useAuth';
+import { Event } from '@/types/events';
 
 interface UseEventFormProps {
-  onSuccess?: (data: EventFormData) => void;
+  onSuccess?: (data: Event | null) => void;
   onError?: (error: unknown) => void;
 }
 
@@ -41,7 +42,21 @@ export const useEventForm = (
       }
 
       // Create event
-      const event = await createEvent(data, user.id);
+      const event = await createEvent({
+        ...data,
+        location: `${data.location.address}, ${data.location.city}, ${data.location.state} ${data.location.zipCode}`,
+        user_id: user.id,
+        status: 'draft',
+        settings: {
+          rsvp_enabled: false,
+          max_guests: data.maxGuests,
+          theme: {
+            primary_color: '#000000',
+            secondary_color: '#ffffff',
+            font_family: 'Inter',
+          },
+        },
+      });
       onSuccess?.(event);
     } catch (error) {
       console.error('Error submitting form:', error);

@@ -1,6 +1,6 @@
 'use client';
 
-import { Event } from '@/types/event';
+import { Event } from '@/types/events';
 import { getEventsByUser } from '@/lib/supabase/events';
 import { useAuth } from '@/hooks/useAuth';
 import { useEffect, useState } from 'react';
@@ -85,20 +85,20 @@ export const EventList = () => {
                 </h3>
                 <span
                   className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${
-                    event.status === 'PUBLISHED'
+                    event.status === 'published'
                       ? 'bg-green-100 text-green-800'
-                      : event.status === 'DRAFT'
+                      : event.status === 'draft'
                       ? 'bg-yellow-100 text-yellow-800'
                       : 'bg-gray-100 text-gray-800'
                   }`}
                 >
-                  {event.status.charAt(0) + event.status.slice(1).toLowerCase()}
+                  {event.status.charAt(0).toUpperCase() + event.status.slice(1)}
                 </span>
               </div>
 
               <div className="mb-4 text-sm text-gray-500">
                 <div>{new Date(event.date).toLocaleDateString()}</div>
-                <div>{event.location.city}, {event.location.state}</div>
+                <div>{event.location}</div>
               </div>
 
               <div className="flex items-center space-x-4 text-sm text-gray-500">
@@ -116,10 +116,7 @@ export const EventList = () => {
                       d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
                     />
                   </svg>
-                  {event.maxGuests} guests max
-                </div>
-                <div>
-                  {event.type === 'BAR_MITZVAH' ? 'Bar Mitzvah' : 'Bat Mitzvah'}
+                  {event.settings.max_guests || 'Unlimited'} guests max
                 </div>
               </div>
             </div>

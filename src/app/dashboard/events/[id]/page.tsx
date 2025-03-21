@@ -3,13 +3,14 @@ import { EventDetails } from "@/components/events/EventDetails";
 import { getEventById } from "@/lib/supabase/events";
 
 interface EventPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 export default async function EventPage({ params }: EventPageProps) {
-  const event = await getEventById(params.id);
+  const { id } = await params;
+  const event = await getEventById(id);
 
   if (!event) {
     notFound();

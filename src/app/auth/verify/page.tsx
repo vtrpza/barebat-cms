@@ -1,10 +1,10 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { useAuth } from '@/hooks/useAuth'
 
-export default function VerifyPage() {
+function VerifyPageContent() {
   const { user } = useAuth()
   const searchParams = useSearchParams()
   const redirectTo = searchParams.get('redirectTo')
@@ -30,5 +30,19 @@ export default function VerifyPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function VerifyPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow text-center">
+          <h2 className="text-3xl font-bold text-gray-900">Loading...</h2>
+        </div>
+      </div>
+    }>
+      <VerifyPageContent />
+    </Suspense>
   )
 } 

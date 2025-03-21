@@ -7,10 +7,12 @@ interface SearchParams {
 }
 
 interface PageProps {
-  searchParams: SearchParams
+  searchParams: Promise<SearchParams>
 }
 
 export default async function LoginPage({ searchParams }: PageProps) {
+  const params = await searchParams
+  
   return (
     <div className="flex min-h-screen items-center justify-center">
       <div className="w-full max-w-md space-y-8 px-4">
@@ -23,7 +25,7 @@ export default async function LoginPage({ searchParams }: PageProps) {
           <input
             type="hidden"
             name="redirectTo"
-            value={searchParams.redirectTo || '/dashboard'}
+            value={params.redirectTo || '/dashboard'}
           />
           
           <div className="space-y-4">
