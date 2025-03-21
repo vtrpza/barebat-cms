@@ -1,43 +1,50 @@
-'use client'
+'use server'
 
-import { useState } from 'react'
-import Link from 'next/link'
-import { useAuth } from '@/hooks/useAuth'
+import { createClient } from '@/lib/supabase/server'
+import { redirect } from 'next/navigation'
 
-export default function LoginPage() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
-  const { signIn } = useAuth()
+export async function signIn(formData: FormData) {
+  const email = formData.get('email') as string
+  const password = formData.get('password') as string
+  const redirectTo = formData.get('redirectTo') as string
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setError('')
-    
-    try {
-      await signIn(email, password)
-    } catch (err) {
-      setError('Invalid email or password')
-    }
+  const supabase = await createClient()
+
+  const { error } = await supabase.auth.signInWithPassword({
+    email,
+    password,
+  })
+
+  if (error) {
+    return redirect('/auth/login?error=' + encodeURIComponent(error.message))
   }
 
+  return redirect(redirectTo || '/dashboard')
+}
+
+export default async function LoginPage({
+  searchParams,
+}: {
+  searchParams: { redirectTo?: string }
+}) {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Sign in to your account
-          </h2>
+    <div className="flex min-h-screen items-center justify-center">
+      <div className="w-full max-w-md space-y-8 px-4">
+        <div className="text-center">
+          <h1 className="text-4xl font-bold">Welcome back</h1>
+          <p className="mt-2 text-gray-600">Sign in to your account</p>
         </div>
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          {error && (
-            <div className="rounded-md bg-red-50 p-4">
-              <p className="text-sm text-red-700">{error}</p>
-            </div>
-          )}
-          <div className="rounded-md shadow-sm -space-y-px">
+
+        <form action={signIn}>
+          <input
+            type="hidden"
+            name="redirectTo"
+            value={searchParams.redirectTo || '/dashboard'}
+          />
+          
+          <div className="space-y-4">
             <div>
-              <label htmlFor="email" className="sr-only">
+              <label htmlFor="email" className="block text-sm font-medium">
                 Email address
               </label>
               <input
@@ -45,14 +52,12 @@ export default function LoginPage() {
                 name="email"
                 type="email"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder="Email address"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
               />
             </div>
+
             <div>
-              <label htmlFor="password" className="sr-only">
+              <label htmlFor="password" className="block text-sm font-medium">
                 Password
               </label>
               <input
@@ -60,27 +65,18 @@ export default function LoginPage() {
                 name="password"
                 type="password"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
               />
             </div>
           </div>
 
-          <div>
+          <div className="mt-6">
             <button
               type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="flex w-full justify-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               Sign in
             </button>
-          </div>
-
-          <div className="text-sm text-center">
-            <Link href="/auth/signup" className="font-medium text-indigo-600 hover:text-indigo-500">
-              Don&apos;t have an account? Sign up
-            </Link>
           </div>
         </form>
       </div>

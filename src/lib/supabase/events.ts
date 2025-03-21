@@ -1,32 +1,25 @@
-import { createClient } from '@/lib/supabase/config';
-import { Event, EventFormData } from '@/types/event';
+import { createClient } from '@/lib/supabase/server';
+import { Event } from '@/types/events';
 
-export async function createEvent(data: EventFormData, userId: string): Promise<Event> {
-  const supabase = createClient();
+export async function createEvent(data: Omit<Event, 'id' | 'created_at' | 'updated_at'>): Promise<Event | null> {
+  const supabase = await createClient();
   
-  const event = {
-    ...data,
-    userId,
-    status: 'DRAFT' as const,
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-  };
-
   const { data: createdEvent, error } = await supabase
     .from('events')
-    .insert(event)
+    .insert(data)
     .select()
     .single();
 
   if (error) {
-    throw new Error(`Failed to create event: ${error.message}`);
+    console.error("Error creating event:", error);
+    return null;
   }
 
-  return createdEvent as Event;
+  return createdEvent;
 }
 
 export async function checkSubdomainAvailability(subdomain: string): Promise<boolean> {
-  const supabase = createClient();
+  const supabase = await createClient();
   
   const { data, error } = await supabase
     .from('events')
@@ -42,23 +35,24 @@ export async function checkSubdomainAvailability(subdomain: string): Promise<boo
 }
 
 export async function getEventsByUser(userId: string): Promise<Event[]> {
-  const supabase = createClient();
+  const supabase = await createClient();
   
   const { data, error } = await supabase
     .from('events')
     .select('*')
-    .eq('userId', userId)
-    .order('createdAt', { ascending: false });
+    .eq('user_id', userId)
+    .order('created_at', { ascending: false });
 
   if (error) {
-    throw new Error(`Failed to fetch events: ${error.message}`);
+    console.error("Error fetching events:", error);
+    return [];
   }
 
-  return data as Event[];
+  return data || [];
 }
 
 export async function getEventById(id: string): Promise<Event | null> {
-  const supabase = createClient();
+  const supabase = await createClient();
   
   const { data, error } = await supabase
     .from("events")
@@ -75,7 +69,7 @@ export async function getEventById(id: string): Promise<Event | null> {
 }
 
 export async function updateEvent(id: string, updates: Partial<Event>): Promise<Event | null> {
-  const supabase = createClient();
+  const supabase = await createClient();
   
   const { data, error } = await supabase
     .from("events")
@@ -93,7 +87,7 @@ export async function updateEvent(id: string, updates: Partial<Event>): Promise<
 }
 
 export async function deleteEvent(id: string): Promise<boolean> {
-  const supabase = createClient();
+  const supabase = await createClient();
   
   const { error } = await supabase
     .from("events")

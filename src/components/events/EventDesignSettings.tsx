@@ -50,6 +50,7 @@ export function EventDesignSettings({ event }: EventDesignSettingsProps) {
         description: "Design settings updated successfully",
       });
     } catch (error) {
+      console.error(error);
       toast({
         title: "Error",
         description: "Failed to update design settings",

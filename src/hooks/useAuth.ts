@@ -19,28 +19,36 @@ export function useAuth() {
     }
   }, [])
 
-  const signIn = async (email: string, password: string) => {
+  const signIn = async (email: string, password: string, redirectTo?: string | null) => {
     try {
       const { error } = await supabase.auth.signInWithPassword({
         email,
         password,
       })
       if (error) throw error
-      router.push('/dashboard')
+      
+      // Navigate to the redirect URL if provided, otherwise go to dashboard
+      router.push(redirectTo || '/dashboard')
     } catch (error) {
       console.error('Error signing in:', error)
       throw error
     }
   }
 
-  const signUp = async (email: string, password: string) => {
+  const signUp = async (email: string, password: string, redirectTo?: string | null) => {
     try {
       const { error } = await supabase.auth.signUp({
         email,
         password,
       })
       if (error) throw error
-      router.push('/auth/verify')
+      
+      // After signup, redirect to verify page with the original redirect URL
+      if (redirectTo) {
+        router.push(`/auth/verify?redirectTo=${encodeURIComponent(redirectTo)}`)
+      } else {
+        router.push('/auth/verify')
+      }
     } catch (error) {
       console.error('Error signing up:', error)
       throw error
