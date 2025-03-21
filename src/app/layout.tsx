@@ -1,4 +1,5 @@
 import { BaseLayout } from '@/components/layouts/BaseLayout'
+import { LoggerProvider } from '@/components/providers/LoggerProvider'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
@@ -18,7 +19,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <BaseLayout>{children}</BaseLayout>
+        <LoggerProvider>
+          <BaseLayout>{children}</BaseLayout>
+        </LoggerProvider>
       </body>
     </html>
   )
