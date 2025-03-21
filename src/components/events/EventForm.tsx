@@ -202,19 +202,19 @@ export const EventForm = ({ defaultValues }: EventFormProps) => {
             </Form.Control>
           </Form.Field>
 
-          <Form.Field name="maxGuests">
+          <Form.Field name="max_guests">
             <div className="flex items-baseline justify-between">
               <Label.Root className="text-sm font-medium">Max Guests</Label.Root>
-              {errors.maxGuests && (
+              {errors.max_guests && (
                 <Form.Message className="text-sm text-red-500">
-                  {errors.maxGuests.message}
+                  {errors.max_guests.message}
                 </Form.Message>
               )}
             </div>
             <Form.Control asChild>
               <input
                 type="number"
-                {...register('maxGuests', { valueAsNumber: true })}
+                {...register('max_guests', { valueAsNumber: true })}
                 className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
                 min={1}
               />

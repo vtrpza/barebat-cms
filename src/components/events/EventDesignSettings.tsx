@@ -27,9 +27,9 @@ export function EventDesignSettings({ event }: EventDesignSettingsProps) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      primary_color: event.settings.theme.primary_color,
-      secondary_color: event.settings.theme.secondary_color,
-      font_family: event.settings.theme.font_family,
+      primary_color: event.theme_config.theme.primary_color,
+      secondary_color: event.theme_config.theme.secondary_color,
+      font_family: event.theme_config.theme.font_family,
     },
   });
 
@@ -37,8 +37,8 @@ export function EventDesignSettings({ event }: EventDesignSettingsProps) {
     try {
       setIsLoading(true);
       const updated = await updateEvent(event.id, {
-        settings: {
-          ...event.settings,
+        theme_config: {
+          ...event.theme_config,
           theme: values,
         },
       });

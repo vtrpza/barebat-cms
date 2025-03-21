@@ -20,19 +20,19 @@ export const useEventForm = (
     defaultValues: {
       type: 'BAR_MITZVAH',
       privacy: 'PRIVATE',
-      maxGuests: 100,
+      max_guests: 100,
       ...defaultValues,
     },
   });
 
-  const handleSubmit = form.handleSubmit(async (data) => {
+  const handleSubmit = form.handleSubmit(async (formData) => {
     if (!user) {
       throw new Error('User must be logged in to create an event');
     }
 
     try {
       // Check subdomain availability
-      const isAvailable = await checkSubdomainAvailability(data.subdomain);
+      const isAvailable = await checkSubdomainAvailability(formData.subdomain);
       if (!isAvailable) {
         form.setError('subdomain', {
           type: 'manual',
@@ -41,22 +41,32 @@ export const useEventForm = (
         return;
       }
 
-      // Create event
-      const event = await createEvent({
-        ...data,
-        location: `${data.location.address}, ${data.location.city}, ${data.location.state} ${data.location.zipCode}`,
+      // Serialize the form data
+      const serializedData = {
+        title: formData.title,
+        description: formData.description,
+        event_date: new Date(formData.date).toISOString(),
+        location: `${formData.location.address}, ${formData.location.city}, ${formData.location.state} ${formData.location.zipCode}`,
         user_id: user.id,
         status: 'draft',
-        settings: {
+        privacy: formData.privacy,
+        max_guests: formData.max_guests,
+        subdomain: formData.subdomain,
+        theme_config: {
           rsvp_enabled: false,
-          max_guests: data.maxGuests,
           theme: {
             primary_color: '#000000',
             secondary_color: '#ffffff',
             font_family: 'Inter',
           },
         },
-      });
+      };
+
+      // Convert to plain object
+      const plainData = JSON.parse(JSON.stringify(serializedData));
+
+      // Create event with serialized data
+      const event = await createEvent(plainData);
       onSuccess?.(event);
     } catch (error) {
       console.error('Error submitting form:', error);

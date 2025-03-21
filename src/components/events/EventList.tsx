@@ -1,7 +1,7 @@
 'use client';
 
 import { Event } from '@/types/events';
-import { getEventsByUser } from '@/lib/supabase/events';
+import { getEventsByUserClient } from '@/lib/supabase/events';
 import { useAuth } from '@/hooks/useAuth';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
@@ -14,20 +14,34 @@ export const EventList = () => {
 
   useEffect(() => {
     const fetchEvents = async () => {
-      if (!user) return;
+      if (!user?.id) {
+        setIsLoading(false);
+        return;
+      }
 
       try {
-        const userEvents = await getEventsByUser(user.id);
+        setError(null);
+        const userEvents = await getEventsByUserClient(user.id);
         setEvents(userEvents);
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to fetch events');
+        console.error('Error fetching events:', err);
+        setError(err instanceof Error ? err.message : 'Failed to fetch events. Please try again later.');
       } finally {
         setIsLoading(false);
       }
     };
 
+    setIsLoading(true);
     fetchEvents();
-  }, [user]);
+  }, [user?.id]); // Only re-run when user.id changes
+
+  if (!user) {
+    return (
+      <div className="rounded-lg bg-yellow-50 p-4">
+        <div className="text-yellow-700">Please sign in to view your events.</div>
+      </div>
+    );
+  }
 
   if (isLoading) {
     return (
@@ -41,6 +55,12 @@ export const EventList = () => {
     return (
       <div className="rounded-lg bg-red-50 p-4">
         <div className="text-red-700">{error}</div>
+        <button 
+          onClick={() => window.location.reload()} 
+          className="mt-2 text-sm text-red-600 hover:text-red-800 underline"
+        >
+          Try again
+        </button>
       </div>
     );
   }
@@ -97,8 +117,8 @@ export const EventList = () => {
               </div>
 
               <div className="mb-4 text-sm text-gray-500">
-                <div>{new Date(event.date).toLocaleDateString()}</div>
-                <div>{event.location}</div>
+                <div>{new Date(event.event_date).toLocaleDateString()}</div>
+                <div>{event.location || 'No location set'}</div>
               </div>
 
               <div className="flex items-center space-x-4 text-sm text-gray-500">
@@ -116,7 +136,7 @@ export const EventList = () => {
                       d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
                     />
                   </svg>
-                  {event.settings.max_guests || 'Unlimited'} guests max
+                  {event.max_guests || 'Unlimited'} guests max
                 </div>
               </div>
             </div>

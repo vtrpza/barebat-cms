@@ -14,18 +14,10 @@ export const eventSchema = z.object({
   }),
   type: z.enum(['BAR_MITZVAH', 'BAT_MITZVAH']),
   privacy: z.enum(['PUBLIC', 'PRIVATE', 'UNLISTED']),
-  maxGuests: z.number().min(1, 'Must allow at least 1 guest'),
+  max_guests: z.number().min(1, 'Must allow at least 1 guest'),
   subdomain: z.string()
     .min(3, 'Subdomain must be at least 3 characters')
     .regex(/^[a-z0-9-]+$/, 'Subdomain can only contain lowercase letters, numbers, and hyphens'),
 });
 
-export type EventFormData = z.infer<typeof eventSchema>;
-
-export type Event = EventFormData & {
-  id: string;
-  userId: string;
-  createdAt: string;
-  updatedAt: string;
-  status: 'DRAFT' | 'PUBLISHED' | 'ARCHIVED';
-}; 
+export type { EventFormData, Event } from './events'; 

@@ -14,8 +14,8 @@ import { toast } from "@/components/ui/use-toast";
 
 const formSchema = z.object({
   title: z.string().min(1, "Title is required"),
-  description: z.string(),
-  date: z.string().min(1, "Date is required"),
+  description: z.string().optional(),
+  event_date: z.string().min(1, "Date is required"),
   location: z.string().min(1, "Location is required"),
   subdomain: z.string().min(1, "Subdomain is required")
     .regex(/^[a-z0-9-]+$/, "Only lowercase letters, numbers, and hyphens are allowed"),
@@ -32,10 +32,10 @@ export function EventGeneralSettings({ event }: EventGeneralSettingsProps) {
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: event.title,
-      description: event.description,
-      date: event.date,
-      location: event.location,
-      subdomain: event.subdomain,
+      description: event.description || '',
+      event_date: event.event_date,
+      location: event.location || '',
+      subdomain: event.subdomain || '',
     },
   });
 
@@ -53,6 +53,7 @@ export function EventGeneralSettings({ event }: EventGeneralSettingsProps) {
         description: "Event settings updated successfully",
       });
     } catch (error) {
+      console.error('Error updating event:', error);
       toast({
         title: "Error",
         description: "Failed to update event settings",
@@ -96,7 +97,7 @@ export function EventGeneralSettings({ event }: EventGeneralSettingsProps) {
 
         <FormField
           control={form.control}
-          name="date"
+          name="event_date"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Date</FormLabel>

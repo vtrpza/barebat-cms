@@ -1,6 +1,6 @@
 'use server'
 
-import { createClient } from '@/lib/supabase/server'
+import { createServerClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 
 export async function signIn(formData: FormData): Promise<void> {
@@ -8,7 +8,7 @@ export async function signIn(formData: FormData): Promise<void> {
   const password = formData.get('password') as string
   const redirectTo = formData.get('redirectTo') as string
 
-  const supabase = await createClient()
+  const supabase = await createServerClient()
 
   const { error } = await supabase.auth.signInWithPassword({
     email,

@@ -14,7 +14,7 @@ import { Switch } from "@/components/ui/switch";
 
 const formSchema = z.object({
   rsvp_enabled: z.boolean(),
-  max_guests: z.number().nullable(),
+  max_guests: z.number().optional(),
 });
 
 interface EventRSVPSettingsProps {
@@ -27,8 +27,8 @@ export function EventRSVPSettings({ event }: EventRSVPSettingsProps) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      rsvp_enabled: event.settings.rsvp_enabled,
-      max_guests: event.settings.max_guests,
+      rsvp_enabled: event.theme_config.rsvp_enabled,
+      max_guests: event.max_guests,
     },
   });
 
@@ -36,10 +36,11 @@ export function EventRSVPSettings({ event }: EventRSVPSettingsProps) {
     try {
       setIsLoading(true);
       const updated = await updateEvent(event.id, {
-        settings: {
-          ...event.settings,
-          ...values,
+        theme_config: {
+          ...event.theme_config,
+          rsvp_enabled: values.rsvp_enabled,
         },
+        max_guests: values.max_guests ?? 100,
       });
       
       if (!updated) {
@@ -50,7 +51,8 @@ export function EventRSVPSettings({ event }: EventRSVPSettingsProps) {
         title: "Success",
         description: "RSVP settings updated successfully",
       });
-    } catch {
+    } catch (error) {
+      console.error('Error updating RSVP settings:', error);
       toast({
         title: "Error",
         description: "Failed to update RSVP settings",
@@ -94,8 +96,8 @@ export function EventRSVPSettings({ event }: EventRSVPSettingsProps) {
               <FormControl>
                 <Input
                   type="number"
-                  value={field.value === null ? '' : field.value}
-                  onChange={(e) => field.onChange(e.target.value ? Number(e.target.value) : null)}
+                  value={field.value ?? ''}
+                  onChange={(e) => field.onChange(e.target.value ? Number(e.target.value) : undefined)}
                   onBlur={field.onBlur}
                   disabled={!form.watch("rsvp_enabled")}
                   placeholder="Leave empty for unlimited"

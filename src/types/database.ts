@@ -12,7 +12,7 @@ export interface Profile {
 
 export interface Event {
   id: string
-  creator_id: string
+  user_id: string
   title: string
   description: string | null
   event_date: string
@@ -20,6 +20,7 @@ export interface Event {
   status: EventStatus
   subdomain: string | null
   theme_config: Record<string, unknown>
+  max_guests: number
   created_at: string
   updated_at: string
 }
