@@ -1,32 +1,16 @@
 'use server'
 
-import { createClient } from '@/lib/supabase/server'
-import { redirect } from 'next/navigation'
+import { signIn } from './actions'
 
-export async function signIn(formData: FormData) {
-  const email = formData.get('email') as string
-  const password = formData.get('password') as string
-  const redirectTo = formData.get('redirectTo') as string
-
-  const supabase = await createClient()
-
-  const { error } = await supabase.auth.signInWithPassword({
-    email,
-    password,
-  })
-
-  if (error) {
-    return redirect('/auth/login?error=' + encodeURIComponent(error.message))
-  }
-
-  return redirect(redirectTo || '/dashboard')
+interface SearchParams {
+  redirectTo?: string
 }
 
-export default async function LoginPage({
-  searchParams,
-}: {
-  searchParams: { redirectTo?: string }
-}) {
+interface PageProps {
+  searchParams: SearchParams
+}
+
+export default async function LoginPage({ searchParams }: PageProps) {
   return (
     <div className="flex min-h-screen items-center justify-center">
       <div className="w-full max-w-md space-y-8 px-4">
